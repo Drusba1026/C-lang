@@ -4,25 +4,73 @@
 
 #pragma warning (disable:4996)
 
+int add(int x, int y) {
+	
+	return x + y;
+}
+
+int minus(int x, int y) {
+
+	return x - y;
+}
+
+int muitple(int x, int y) {
+
+	return x * y;
+}
+
+
+void showIntArray(int x[10]) {
+
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d, ", x[i]);
+	}
+}
+
+void swap(int* px, int* py) {
+
+	int temp = 0;
+
+	temp = *px;
+	*px = *py;
+	*py = temp;
+}
+
+void swapChar (char *px, char *py) {
+
+	char temp;
+
+	temp = *px;
+	*px = *py;
+	*py = temp;
+
+}
+
 int main() {
 
-	char coffee[3][20];
-	
-	int i;
+	int a, b, c;
 
-	char* p[3];
+	int d[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
+	char a1 = 'b';
+	char a2 = 'c';
 
-	for (i = 0; i < sizeof(coffee)/sizeof(coffee[0]); i++)
-	{
-		printf("%d번째 커피메뉴를 등록해주세요 (글자수 20으로 제한) > ", i+1);
+	a = add(10, 20);
+	b = minus(10, 20);
+	c = muitple(10, 20);
 
-		gets(coffee[i]);
+	printf("%d %d %d ", a, b, c);
 
-		p[i] = &coffee[i];
-	}
+	showIntArray(d);
 
-	printf("메뉴판은 %s, %s, %s으로 설정되었습니다", p[0], p[1], p[2]);
+	printf("\n a:%d / b:%d", a, b);
+	swap(&a, &b);
+	printf("\n a:%d / b:%d", a, b);
+
+	printf("\n a1: %c // a2 : %c", a1, a2);
+	swapChar(&a1, &a2);
+	printf("\n a1: %c // a2 : %c", a1, a2);
 
 	return 0;
 }
