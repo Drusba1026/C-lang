@@ -1,76 +1,127 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h> // printf / scanf 필수
+#include <stdlib.h> // 동적할당 필수
+#include <string.h> // 문자열 함수 필수
 
 #pragma warning (disable:4996)
 
-int add(int x, int y) {
-	
-	return x + y;
+double square(double n)
+{
+	return n * n;
 }
 
-int minus(int x, int y) {
-
-	return x - y;
-}
-
-int muitple(int x, int y) {
-
-	return x * y;
-}
-
-
-void showIntArray(int x[10]) {
+int arraySum(int x[10])
+{
+	int sum = 0;
 
 	for (int i = 0; i < 10; i++)
 	{
-		printf("%d, ", x[i]);
+		sum += x[i];
 	}
+
+	return sum;
 }
 
-void swap(int* px, int* py) {
+typedef struct coffee {
 
-	int temp = 0;
+	char name[10];
+	int price;
+	int shots;
+} caf;
 
-	temp = *px;
-	*px = *py;
-	*py = temp;
+
+
+int arraySum2(int x[10], int size)
+{
+	int sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		sum += x[i];
+	}
+
+	return sum;
 }
 
-void swapChar (char *px, char *py) {
+/*
 
-	char temp;
+struct coffee {
+	
+	char name[20];
+	int price;
+	double height;
+	int shots;
+};
 
-	temp = *px;
-	*px = *py;
-	*py = temp;
+*/
 
-}
+// 학생 구조체 이름, 학과, 학번
+
+struct student {
+
+	char name[10];
+	char class[15];
+	int id;
+
+	struct coffee coffee;
+};
+
+
+void raiseCoffeePrice(caf* x, int price);
+
+
 
 int main() {
 
-	int a, b, c;
 
-	int d[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+	/*
+	struct coffee a;
+	a.price = 4000;
+	strcpy(a.name, "americano");
+	a.shots = 2;
 
-	char a1 = 'b';
-	char a2 = 'c';
+	struct student b;
+	strcpy(b.name, "강민욱");
+	strcpy(b.class, "컴퓨터공학과");
+	b.id = 2023081001;
+	b.coffee = a;
 
-	a = add(10, 20);
-	b = minus(10, 20);
-	c = muitple(10, 20);
+	printf("이름:%s / 전공:%s / 커피:%s", b.name, b.class, b.coffee.name);
 
-	printf("%d %d %d ", a, b, c);
+	*/
 
-	showIntArray(d);
+	/*
+	int a[3] = { 1,2,3 };
 
-	printf("\n a:%d / b:%d", a, b);
-	swap(&a, &b);
-	printf("\n a:%d / b:%d", a, b);
+	caf menu[3] = { {"americano", 4000, 1} , {"main", 5000, 2} , { "bonus", 2500, 1} };
 
-	printf("\n a1: %c // a2 : %c", a1, a2);
-	swapChar(&a1, &a2);
-	printf("\n a1: %c // a2 : %c", a1, a2);
+	raiseCoffeePrice(&menu[0], 1000);
+	raiseCoffeePrice(&menu[1], 500);
+	raiseCoffeePrice(&menu[2], 700);
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		printf("메뉴이름: %s / 가격: %d / 샷 횟수: %d\n", menu[i].name, menu[i].price + 1000, menu[i].shots);
+	}
+
+	*/
+
+	// dynamic_Allocation
+
+	int num;
+	printf("얼마나 생성하시겠습니까?");
+	scanf("%d", &num);
+
+	int* p;
+
+	// malloc
+	p = (int*)malloc(sizeof(int) * num);
 
 	return 0;
+}
+
+
+void raiseCoffeePrice(caf* x, int price)
+{
+		(*x).price += price;
 }
