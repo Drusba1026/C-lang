@@ -4,124 +4,83 @@
 
 #pragma warning (disable:4996)
 
-double square(double n)
+typedef struct bookStruct
 {
-	return n * n;
-}
-
-int arraySum(int x[10])
-{
-	int sum = 0;
-
-	for (int i = 0; i < 10; i++)
-	{
-		sum += x[i];
-	}
-
-	return sum;
-}
-
-typedef struct coffee {
-
-	char name[10];
+	char bookname[20];
+	char author[20];
 	int price;
-	int shots;
-} caf;
+	int ISBN;
+} book;
 
+void raiseBookPrice(int* pPrice, int add);
 
+void changeWritter(char* pAuthor, char* authorNewName);
 
-int arraySum2(int x[10], int size)
-{
-	int sum = 0;
-
-	for (int i = 0; i < size; i++)
-	{
-		sum += x[i];
-	}
-
-	return sum;
-}
-
-/*
-
-struct coffee {
-	
-	char name[20];
-	int price;
-	double height;
-	int shots;
-};
-
-*/
-
-// 학생 구조체 이름, 학과, 학번
-
-struct student {
-
-	char name[10];
-	char class[15];
-	int id;
-
-	struct coffee coffee;
-};
-
-
-void raiseCoffeePrice(caf* x, int price);
-
-
+double calAverage(int* pArr, int size);
 
 int main() {
 
-
 	/*
-	struct coffee a;
-	a.price = 4000;
-	strcpy(a.name, "americano");
-	a.shots = 2;
+	book favorite = { "이방인" , "카뮈", 12000, 456};
 
-	struct student b;
-	strcpy(b.name, "강민욱");
-	strcpy(b.class, "컴퓨터공학과");
-	b.id = 2023081001;
-	b.coffee = a;
+	raiseBookPrice(&(favorite.price), 2000);
 
-	printf("이름:%s / 전공:%s / 커피:%s", b.name, b.class, b.coffee.name);
+	changeWritter(&(favorite.author), "쇼펜하우어");
+
+	printf("%d %s",favorite.price, favorite.author);
 
 	*/
 
-	/*
-	int a[3] = { 1,2,3 };
-
-	caf menu[3] = { {"americano", 4000, 1} , {"main", 5000, 2} , { "bonus", 2500, 1} };
-
-	raiseCoffeePrice(&menu[0], 1000);
-	raiseCoffeePrice(&menu[1], 500);
-	raiseCoffeePrice(&menu[2], 700);
+	// 1. 학생 수 입력 2. 동적인 배열 생성 3. 영어 점수 평균 구하기 
 
 
-	for (int i = 0; i < 3; i++)
+	int input = 0;
+
+	printf("반의 학생수를 입력해주세요 > ");
+	scanf("%d", &input);
+
+	int* arr;
+	arr = (int*) malloc(input * sizeof(int));  // (int *) 는 c++ 에서는 필수임
+
+	int i;
+
+	for (i = 0; i < input; i++)
 	{
-		printf("메뉴이름: %s / 가격: %d / 샷 횟수: %d\n", menu[i].name, menu[i].price + 1000, menu[i].shots);
+		printf("%d번째 학생의 영어점수를 입력하세요 > ", i+1);
+		scanf("%d", &arr[i]);
 	}
 
-	*/
 
-	// dynamic_Allocation
+	double average = 0;
 
-	int num;
-	printf("얼마나 생성하시겠습니까?");
-	scanf("%d", &num);
+	average = calAverage(arr, input);
 
-	int* p;
+	printf("학생들의 영어점수 평균은 %lf입니다", average);
 
-	// malloc
-	p = (int*)malloc(sizeof(int) * num);
+	free(arr);
 
 	return 0;
 }
 
 
-void raiseCoffeePrice(caf* x, int price)
+void raiseBookPrice(int* pPrice, int add) 
 {
-		(*x).price += price;
+	*pPrice += add;
+}
+
+void changeWritter(char* pAuthor, char *authorNewName)
+{
+	strcpy(pAuthor, authorNewName);
+}
+
+double calAverage(int* pArr, int size)
+{
+	int sum = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		sum += pArr[i];
+	}
+
+	return (double)sum / size;
 }
